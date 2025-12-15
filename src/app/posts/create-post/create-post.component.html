@@ -1,0 +1,22 @@
+<div>
+  <h1>Create Post</h1>
+  <form (submit)="onSubmit(postForm)" #postForm="ngForm">
+    <button type="button" mat-stroked-button (click)="openFiles.click()">
+      Browse Files...
+    </button>
+    <input
+      type="file"
+      #openFiles
+      name="imagePath"
+      (change)="onImagePicked($event)"
+    />
+    <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview">
+      <img [src]="imagePreview" />
+    </div>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea matInput name="description" ngModel></textarea>
+    </mat-form-field>
+    <button type="submit" mat-flat-button>Create</button>
+  </form>
+</div>

@@ -1,0 +1,86 @@
+:host {
+  display: block;
+  width: 100%;
+
+  mat-sidenav-container {
+    display: block;
+    height: 100vh;
+
+    ::ng-deep .mat-drawer {
+      z-index: 1;
+    }
+
+    &.sidenav-expanded {
+      mat-sidenav {
+        width: 250px;
+      }
+    }
+    &.sidenav-collapsed {
+      mat-sidenav {
+        width: 65px;
+      }
+      mat-sidenav-content {
+        margin-left: 65px !important;
+      }
+    }
+    mat-sidenav {
+      transition: width 0.3s ease;
+
+      ::ng-deep .mat-drawer-inner-container {
+        overflow: hidden !important;
+      }
+    }
+    mat-sidenav-content {
+      overflow: hidden;
+      overflow-y: auto !important;
+
+      main {
+        height: 93vh;
+        box-sizing: border-box;
+        padding: 30px;
+        overflow-x: hidden;
+        overflow-y: auto !important;
+        margin-bottom: auto;
+        flex-grow: 1;
+
+        ::ng-deep app-posts {
+          width: 60%;
+        }
+
+        ::ng-deep app-suggested-list {
+          width: 40%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  mat-sidenav-container {
+    display: flex !important;
+    flex-direction: column !important;
+
+    mat-sidenav {
+      width: 100% !important;
+      position: fixed;
+      top: 93%;
+      order: 2;
+      z-index: 2 !important;
+      border-radius: 0 !important;
+    }
+
+    mat-sidenav-content {
+      width: 100%;
+      margin-left: 0 !important;
+      order: 1;
+
+      main {
+        height: 85% !important;
+      }
+    }
+  }
+  :host mat-sidenav-container.sidenav-collapsed mat-sidenav-content,
+  :host mat-sidenav-container.sidenav-expanded mat-sidenav-content {
+    margin-left: 0 !important;
+  }
+}

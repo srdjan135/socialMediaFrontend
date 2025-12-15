@@ -1,0 +1,182 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.profile {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 3rem;
+
+  .profile-info {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+
+    button {
+      border-radius: 5px;
+      width: 100%;
+    }
+  }
+
+  .action-buttons {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .private {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+
+    button {
+      width: 700px;
+    }
+  }
+
+  img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  div.user-info {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+mat-tab-group {
+  width: 80%;
+
+  ::ng-deep .mat-mdc-tab-body-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+
+    mat-tab-body {
+      .spinner {
+        display: flex;
+        justify-content: center;
+      }
+      div.image {
+        overflow: hidden;
+        display: inline-block;
+
+        img {
+          width: 300px;
+          height: 200px;
+          margin: 5px;
+          object-fit: cover;
+          overflow: hidden;
+          transition: 0.3s ease;
+
+          &:hover {
+            cursor: pointer;
+            transform: scale(1.2);
+          }
+        }
+      }
+
+      a {
+        color: var(--app-text-color);
+        text-decoration: none;
+        display: block;
+        margin-bottom: 0.5rem;
+
+        mat-card {
+          flex-direction: row;
+          justify-content: space-between;
+
+          mat-card-title {
+            padding-top: 5px !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+.post-modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.79);
+
+  app-post {
+    width: 40%;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .post-modal {
+    app-post {
+      width: 60% !important;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .private {
+    button {
+      width: 80% !important;
+    }
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .profile {
+    .profile-info {
+      img {
+        width: 100px !important;
+        height: 100px !important;
+      }
+    }
+  }
+
+  mat-tab-group {
+    ::ng-deep .mat-mdc-tab-body-content {
+      overflow: hidden !important;
+    }
+  }
+
+  .post-modal {
+    app-post {
+      width: 80% !important;
+    }
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .private {
+    button {
+      width: 95% !important;
+    }
+  }
+  mat-tab-group {
+    .image {
+      img {
+        width: 100% !important;
+      }
+    }
+  }
+  .post-modal {
+    app-post {
+      width: 90% !important;
+    }
+  }
+}

@@ -1,0 +1,15 @@
+<div>
+  <h5>Suggested for you:</h5>
+  @if (isLoading) {
+  <div>
+    <mat-spinner></mat-spinner>
+  </div>
+  } @for(user of users; track user._id) {
+  <app-suggested-account
+    [itemData]="user"
+    [currentUser]="currentUser"
+  ></app-suggested-account>
+  } @empty { @if (!isLoading) {
+  <p>No accounts find</p>
+  } }
+</div>

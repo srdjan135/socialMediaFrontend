@@ -1,0 +1,112 @@
+<mat-toolbar>
+  @if (currentUser?._id === chat?.recipientId) {
+  <ng-container>
+    <div class="user-info">
+      @if (isMobile) {
+      <button mat-icon-button routerLink="/chats">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      }
+      <img
+        mat-card-avatar
+        [src]="senderUser?.imagePath || '/assets/user_blank.png'"
+      />
+      <span>{{ senderUser?.username }}</span>
+    </div>
+  </ng-container>
+
+  } @else {
+  <ng-container>
+    <div class="user-info">
+      @if (isMobile) {
+      <button mat-icon-button routerLink="/chats">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      }
+      <img
+        mat-card-avatar
+        [src]="recipientUser?.imagePath || '/assets/user_blank.png'"
+      />
+      <span>{{ recipientUser?.username }}</span>
+    </div>
+  </ng-container>
+  }
+  <div>
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="more-actions">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="deleteChat()">
+        <mat-icon>delete</mat-icon>
+        <span>Delete chat</span>
+      </button>
+    </mat-menu>
+  </div>
+</mat-toolbar>
+<div class="messages">
+  @if (!isLoading) { @for (msg of messages; track msg?._id) { @if (currentUser)
+  {
+  <div
+    class="message"
+    [ngClass]="{
+      'my-message': msg?.senderId === currentUser?._id,
+      'their-message': msg?.senderId !== currentUser?._id
+    }"
+    #messagesContainer
+  >
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="more-actions">
+      <mat-icon>more_horiz</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="deleteMessage(msg._id)">
+        <mat-icon>delete</mat-icon>
+        <span>Delete message</span>
+      </button>
+    </mat-menu>
+    <div class="profile-image">
+      <img
+        [src]="
+          msg?.senderId === currentUser?._id
+            ? currentUser?.imagePath || '/assets/user_blank.png'
+            : recipientUser?.imagePath || '/assets/user_blank.png'
+        "
+      />
+    </div>
+    <div class="bubble">
+      {{ msg?.text }}
+      <div class="bubble-inner">
+        <span>
+          {{ msg.createdAt | date : "HH:mm" }}
+        </span>
+        @if (msg?.senderId === currentUser?._id) {
+        <mat-icon>
+          {{ msg.isRead ? "done_all" : "done" }}
+        </mat-icon>
+        }
+      </div>
+    </div>
+  </div>
+  } } } @else {
+  <mat-spinner></mat-spinner>
+  }
+</div>
+<div class="typing-indicator" *ngIf="isTyping">
+  <span>{{ recipientUser?.username }} is typing</span>
+  <span class="dots"> <span></span><span></span><span></span> </span>
+</div>
+<div class="send-message">
+  <mat-form-field>
+    <mat-label>Type message...</mat-label>
+    <input
+      matInput
+      type="text"
+      [(ngModel)]="message"
+      (keyup.enter)="sendMessage()"
+      (input)="onTyping()"
+      (blur)="onStopTyping()"
+    />
+    <button mat-icon-button matSuffix (click)="sendMessage()">
+      <mat-icon>send</mat-icon>
+    </button>
+  </mat-form-field>
+</div>

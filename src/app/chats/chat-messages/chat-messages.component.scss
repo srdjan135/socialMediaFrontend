@@ -1,0 +1,159 @@
+mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--app-text-color);
+  height: 65px;
+
+  div.user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    img {
+      margin: 0;
+    }
+  }
+}
+
+.messages {
+  height: calc(100% - 144px);
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  & > :first-child {
+    margin-top: auto !important;
+  }
+  .message {
+    display: flex;
+    align-items: end;
+    width: 100%;
+    gap: 0.5rem;
+
+    .profile-image {
+      width: 40px;
+      height: 40px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
+    }
+
+    .bubble {
+      max-width: 70%;
+      padding: 0.6rem 1rem 0.2rem 1rem;
+      border-radius: 12px;
+      font-size: 15px;
+      line-height: 1.4;
+      word-wrap: break-word;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+
+      .bubble-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.5rem;
+
+        span {
+          font-size: 12px;
+        }
+
+        mat-icon {
+          width: 15px;
+          height: 15px;
+          font-size: 15px;
+          display: block;
+        }
+      }
+    }
+  }
+
+  .my-message {
+    justify-content: flex-end;
+
+    .profile-image {
+      order: 1;
+    }
+
+    &:hover {
+      .more-actions {
+        display: block;
+      }
+    }
+
+    & .bubble {
+      background: #1976d2;
+      color: white;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  .their-message {
+    justify-content: flex-start;
+
+    .profile-image {
+      order: 0;
+    }
+
+    & .bubble {
+      background: #e0e0e0;
+      color: #333;
+      border-bottom-left-radius: 0;
+    }
+  }
+
+  .more-actions {
+    display: none;
+  }
+}
+
+.typing-indicator {
+  font-size: 12px;
+  color: #888;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 40px;
+
+  .dots span {
+    width: 4px;
+    height: 4px;
+    background: #888;
+    border-radius: 50%;
+    display: inline-block;
+    animation: blink 1.4s infinite both;
+
+    & span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    & span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+  }
+
+  @keyframes blink {
+    0% {
+      opacity: 0.2;
+    }
+    20% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.2;
+    }
+  }
+}
+
+.send-message {
+  padding-left: 1rem;
+  mat-form-field {
+    width: 100%;
+  }
+}

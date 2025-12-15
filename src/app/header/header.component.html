@@ -1,0 +1,74 @@
+<mat-toolbar>
+  <div class="logo" *ngIf="!isBigSearchOpen" routerLink="/">InstaFlow</div>
+  <div class="search" *ngIf="isSearchOpen || isBigSearchOpen">
+    <button mat-icon-button *ngIf="isBigSearchOpen" (click)="closeSearch()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <mat-form-field appearance="outline">
+      <input
+        type="text"
+        placeholder="Search Profile..."
+        matInput
+        [formControl]="searchControl"
+        [matAutocomplete]="auto"
+      />
+
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option
+          *ngFor="let user of filteredUsers"
+          [value]="user.username"
+          (onSelectionChange)="selectUser(user)"
+        >
+          <img [src]="user?.imagePath || 'assets/user_blank.png'" width="24" />
+          {{ user.username }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+
+  <button
+    mat-icon-button
+    class="search-button"
+    *ngIf="!isBigSearchOpen && !isSearchOpen"
+    (click)="openSearch()"
+  >
+    <mat-icon>search</mat-icon>
+  </button>
+  <div class="header-end" *ngIf="!isBigSearchOpen">
+    <div class="toggle-theme">
+      <mat-slide-toggle
+        [checked]="isDarkMode"
+        (change)="toggleTheme()"
+      ></mat-slide-toggle>
+    </div>
+    <div class="user-info">
+      <img
+        class="user-icon"
+        [src]="
+          currentUser?.imagePath
+            ? currentUser?.imagePath
+            : '/assets/user_blank.png'
+        "
+        alt=""
+        [matMenuTriggerFor]="menu"
+      />
+      <span [matMenuTriggerFor]="menu"
+        ><mat-icon>keyboard_arrow_down</mat-icon></span
+      >
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="['/edit', currentUser?._id]">
+          <mat-icon>edit</mat-icon>
+          <span>Edit Profile</span>
+        </button>
+        <button mat-menu-item (click)="onLogout()">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
+        <button mat-menu-item (click)="onDeleteProfile()">
+          <mat-icon>delete</mat-icon>
+          <span>Delete Profile</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</mat-toolbar>

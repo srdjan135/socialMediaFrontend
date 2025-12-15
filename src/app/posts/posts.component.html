@@ -1,0 +1,14 @@
+<div>
+  @if (isLoading) {
+  <div>
+    <mat-spinner></mat-spinner>
+  </div>
+  } @if (posts.length > 0) { @for(post of posts; track post._id) {
+  <app-post
+    [postData]="post"
+    (postDeleted)="handlePostDeleted($event)"
+  ></app-post>
+  } } @else { @if (!isLoading) {
+  <p>No posts yet. Find friends</p>
+  } }
+</div>

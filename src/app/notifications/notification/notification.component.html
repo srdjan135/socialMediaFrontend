@@ -1,0 +1,49 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <img
+      mat-card-avatar
+      [src]="
+        senderUser?.imagePath ? senderUser?.imagePath : '/assets/user_blank.png'
+      "
+      alt=""
+      (click)="navigateToUserAccount(senderUser)"
+    />
+    <mat-card-title (click)="navigateToUserAccount(senderUser)">
+      {{ senderUser.username }}
+      <span>{{ getNotificationMessage(notification) }}</span>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-actions>
+    @if (notification.type === 'followRequest') { @if (!getIsFollowing()) {
+    <button
+      *ngIf="
+        buttonText === 'Accept' || buttonText === 'Follow Back';
+        else strokedBtn
+      "
+      mat-flat-button
+      (click)="acceptFollowRequestAndFollowBack()"
+    >
+      {{ buttonText }}
+    </button>
+    <ng-template #strokedBtn>
+      <button mat-stroked-button (click)="declineFollowBackRequest()">
+        {{ buttonText }}
+      </button>
+    </ng-template>
+    <button mat-stroked-button (click)="deleteNotification(notification._id)">
+      Decline
+    </button>
+    } @else {
+    <button mat-stroked-button>Following</button>
+    } }
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" xPosition="before">
+      <button mat-menu-item (click)="deleteNotification(notification._id)">
+        <mat-icon>delete</mat-icon>
+        <span>Delete</span>
+      </button>
+    </mat-menu>
+  </mat-card-actions>
+</mat-card>

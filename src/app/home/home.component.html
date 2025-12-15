@@ -1,0 +1,11 @@
+<div class="suggested-button">
+  <button mat-stroked-button (click)="openList()">Suggested For You</button>
+</div>
+<app-posts></app-posts>
+@if (isOpenedSuggestedList) {
+<app-suggested-list></app-suggested-list>
+} @if (!isOpenedSuggestedList && openSuggested) {
+<div class="suggested-modal" (click)="closeList()">
+  <app-suggested-list clickStopPropagation></app-suggested-list>
+</div>
+}

@@ -1,0 +1,37 @@
+mat-card {
+  width: 80%;
+  margin: auto;
+
+  mat-card-header {
+    display: flex;
+    justify-content: space-between;
+
+    ::ng-deep .mat-mdc-card-header-text {
+      display: none;
+    }
+
+    div {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      a {
+        color: var(--app-text-color);
+        text-decoration: none;
+      }
+
+      mat-card-title {
+        margin-bottom: 1.5rem;
+      }
+    }
+  }
+
+  .content-img {
+    width: 100%;
+  }
+
+  mat-card-actions div {
+    display: flex;
+    align-items: center;
+  }
+}

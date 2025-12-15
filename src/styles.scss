@@ -1,1 +1,70 @@
-/* You can add global styles to this file, and also import other style files */
+@use "@angular/material" as mat;
+
+@include mat.core();
+
+:root {
+  --app-text-color: #e9e0e4;
+  --app-primary-color: #d5baff;
+  --app-bg-color: #161215;
+}
+
+$light-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: light,
+      primary: mat.$magenta-palette,
+    ),
+  )
+);
+
+.light-theme {
+  @include mat.all-component-themes($light-theme);
+  --app-text-color: #1d1b1e;
+  --app-primary-color: #7d00fa;
+  --app-bg-color: #fef8fc;
+}
+$dark-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: dark,
+      primary: mat.$magenta-palette,
+    ),
+  )
+);
+
+.dark-theme {
+  @include mat.all-component-themes($dark-theme);
+  --app-text-color: #e9e0e4;
+  --app-primary-color: #d5baff;
+  --app-bg-color: #161215;
+}
+html {
+  @include mat.all-component-themes($dark-theme);
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  box-sizing: border-box !important;
+  background-color: var(--app-bg-color);
+
+  .cdk-overlay-container .cdk-global-overlay-wrapper .cdk-overlay-pane {
+    width: 450px;
+
+    mat-dialog-container app-dialog mat-dialog-content {
+      max-height: 350px;
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    .cdk-overlay-container .cdk-global-overlay-wrapper .cdk-overlay-pane {
+      width: 550px;
+    }
+  }
+}

@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>{{ data.name }}</h2>
+<mat-dialog-content>
+  <app-comments [postId]="data.postId"></app-comments>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <form (submit)="onSubmit(commentForm)" #commentForm="ngForm">
+    <mat-form-field>
+      <input
+        type="text"
+        matInput
+        placeholder="Add Comment..."
+        name="comment"
+        ngModel
+      />
+      <button matSuffix mat-icon-button clickStopPropagation>
+        <mat-icon>send</mat-icon>
+      </button>
+    </mat-form-field>
+  </form>
+</mat-dialog-actions>

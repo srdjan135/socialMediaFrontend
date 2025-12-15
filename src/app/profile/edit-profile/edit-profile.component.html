@@ -1,0 +1,43 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="wrapper">
+    <img
+      mat-card-avatar
+      [src]="user?.imagePath ? user?.imagePath : '/assets/user_blank.png'"
+      alt=""
+    />
+    <div class="image-buttons">
+      <button type="button" mat-stroked-button (click)="openFiles.click()">
+        Choose Profile Picture
+        <mat-icon>edit</mat-icon>
+      </button>
+      @if (user?.imagePath) {
+      <button type="button" mat-stroked-button (click)="deleteProfileImage()">
+        Remove Profile Picture
+        <mat-icon>delete</mat-icon>
+      </button>
+      }
+    </div>
+    <input type="file" (change)="onImagePicked($event)" #openFiles />
+  </div>
+
+  <mat-form-field>
+    <mat-label>E-mail</mat-label>
+    <input matInput formControlName="email" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Username</mat-label>
+    <input matInput formControlName="username" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Biography</mat-label>
+    <textarea matInput formControlName="biography"></textarea>
+  </mat-form-field>
+
+  <mat-slide-toggle formControlName="isPrivate">
+    Is Account Private
+  </mat-slide-toggle>
+
+  <button type="submit" mat-flat-button>Update Profile</button>
+</form>

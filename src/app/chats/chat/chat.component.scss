@@ -1,0 +1,45 @@
+mat-card {
+  border: none;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem;
+
+  mat-card-header {
+    padding: 0;
+    align-items: center;
+    .image {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      img {
+        margin: 0;
+      }
+
+      .is-active {
+        width: 12px;
+        height: 12px;
+        background-color: green;
+        position: absolute;
+        top: 70%;
+        left: 70%;
+        border-radius: 50%;
+      }
+    }
+
+    mat-card-title {
+      padding: 0;
+      padding-left: 0.5rem;
+      font-size: 1rem;
+    }
+  }
+}
+
+mat-card.active {
+  background-color: var(--app-primary-color) !important;
+
+  mat-card-title {
+    color: #1a1a1a !important;
+  }
+}

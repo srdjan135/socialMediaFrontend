@@ -1,0 +1,35 @@
+<a [routerLink]="['/', itemData?.username]">
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <img
+        mat-card-avatar
+        [src]="
+          itemData?.imagePath ? itemData?.imagePath : '/assets/user_blank.png'
+        "
+        alt=""
+      />
+      <mat-card-title>{{ itemData.username }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-actions>
+      @if ((isAcceptRequest || followBack) || isRequestFollowBack) {
+      <button
+        mat-flat-button
+        clickStopPropagation
+        [preventDefault]="true"
+        (click)="acceptFollowRequestAndFollowBack()"
+      >
+        {{ buttonText }}
+      </button>
+      } @else {
+      <button
+        mat-button
+        clickStopPropagation
+        [preventDefault]="true"
+        (click)="followRequest()"
+      >
+        {{ buttonText }}
+      </button>
+      }
+    </mat-card-actions>
+  </mat-card>
+</a>

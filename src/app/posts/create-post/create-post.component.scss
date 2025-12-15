@@ -1,0 +1,27 @@
+h1 {
+  font-size: 2rem;
+}
+form {
+  button {
+    border-radius: 5px;
+    margin-bottom: 1rem;
+  }
+  input[type="file"] {
+    display: none;
+  }
+  mat-form-field {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  form {
+    button {
+      width: 100%;
+    }
+  }
+}

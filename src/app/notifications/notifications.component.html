@@ -1,0 +1,18 @@
+<h1>Notifications:</h1>
+
+@if (isLoading()) {
+<div class="spinner">
+  <mat-spinner></mat-spinner>
+</div>
+} @else { @if (vm().notifications.length > 0) { @for (notification of
+vm().notifications; track notification._id) {
+<app-notification
+  [notification]="notification"
+  [senderUser]="vm().userMap.get(notification.senderId)!"
+  [currentUser]="vm().currentUser!"
+  (deletedNotification)="onDeletedNotification($event)"
+  [notifications]="vm().notifications"
+/>
+} } @else {
+<p>No notifications yet.</p>
+} }

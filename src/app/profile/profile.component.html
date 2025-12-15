@@ -1,0 +1,165 @@
+<div class="profile">
+  <div class="profile-info">
+    <img
+      mat-card-avatar
+      [src]="
+        profileUser?.imagePath
+          ? profileUser?.imagePath
+          : '/assets/user_blank.png'
+      "
+      alt=""
+    />
+    <div>
+      <h5>{{ profileUser?.username }}</h5>
+      <div class="user-info">
+        <span>{{ profileUser?.posts?.length }} posts</span>
+        <span>{{ profileUser?.followers?.length }} followers</span>
+        <span>{{ profileUser?.following?.length }} following</span>
+      </div>
+      <p>{{ profileUser?.biography }}</p>
+      @if (currentUser?._id === profileUser?._id) { @if (this.currentUser ||
+      this.profileUser) {
+      <button mat-flat-button [routerLink]="['/edit', currentUser?._id]">
+        Edit Profile
+      </button>
+      } } @if (getActionButtons()) {
+      <div class="action-buttons">
+        <button mat-flat-button (click)="followRequest()">
+          {{ buttonText }}
+        </button>
+        <button mat-stroked-button (click)="createChat()">Message</button>
+      </div>
+      }
+    </div>
+  </div>
+  @if (!getProfileContent()) {
+  <div class="private">
+    @if ((isAcceptRequest || followBack) || isRequestFollowBack) {
+    <button mat-flat-button (click)="acceptFollowRequestAndFollowBack()">
+      {{ buttonText }}
+    </button>
+    } @else {
+    <button mat-flat-button (click)="followRequest()">
+      {{ buttonText }}
+    </button>
+    }
+
+    <p>This account is private</p>
+  </div>
+  }
+</div>
+@if (getProfileContent() && (this.currentUser || this.profileUser)) {
+<mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
+  <mat-tab>
+    @if (isLoading) {
+    <div class="spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+    }
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">apps</mat-icon>
+    </ng-template>
+
+    @for(post of profileUser?.posts; track post._id) {
+    <div class="image" (click)="openPost(post)">
+      <img [src]="post?.imagePath" alt="" />
+    </div>
+
+    } @empty { @if (!isLoading) {
+    <p>No posts yet</p>
+    } }
+  </mat-tab>
+
+  <mat-tab>
+    @if (isLoading) {
+    <div class="spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+    }
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">people</mat-icon>
+    </ng-template>
+    @for(follower of followersList; track follower) {
+
+    <a [routerLink]="['/', follower.username]">
+      <mat-card appearance="outlined">
+        <mat-card-header>
+          <img
+            mat-card-avatar
+            [src]="
+              follower?.imagePath
+                ? follower?.imagePath
+                : '/assets/user_blank.png'
+            "
+            alt=""
+          />
+          <mat-card-title>{{ follower?.username }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-actions>
+          @if (currentUser?._id === profileUser?._id) {
+          <button
+            mat-stroked-button
+            clickStopPropagation
+            [preventDefault]="true"
+            (click)="removeFollower(follower._id)"
+          >
+            Remove
+          </button>
+          }
+        </mat-card-actions>
+      </mat-card>
+    </a>
+    } @empty { @if (!isLoading) {
+    <p>No followers yet</p>
+    } }
+  </mat-tab>
+
+  <mat-tab>
+    @if (isLoading) {
+    <div class="spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+    }
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">group_add</mat-icon>
+    </ng-template>
+    @for(following of followingList; track following) {
+
+    <a [routerLink]="['/', following.username]">
+      <mat-card appearance="outlined">
+        <mat-card-header>
+          <img
+            mat-card-avatar
+            [src]="
+              following?.imagePath
+                ? following?.imagePath
+                : '/assets/user_blank.png'
+            "
+            alt=""
+          />
+          <mat-card-title>{{ following?.username }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-actions>
+          @if (currentUser?._id === profileUser?._id) {
+          <button
+            mat-stroked-button
+            clickStopPropagation
+            [preventDefault]="true"
+            (click)="unfollow(following._id)"
+          >
+            Unfollow
+          </button>
+          }
+        </mat-card-actions>
+      </mat-card>
+    </a>
+    } @empty { @if (!isLoading) {
+    <p>No following yet</p>
+    } }
+  </mat-tab>
+</mat-tab-group>
+@if (selectedPost) {
+<div class="post-modal" (click)="closePost()">
+  <app-post [postData]="selectedPost" clickStopPropagation></app-post>
+</div>
+} }

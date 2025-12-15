@@ -1,0 +1,133 @@
+:host {
+  display: block;
+
+  mat-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    height: 7vh;
+
+    .logo {
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      cursor: pointer;
+    }
+
+    .search {
+      width: 30%;
+      mat-form-field {
+        width: 100%;
+        height: 40px;
+
+        ::ng-deep .mdc-text-field--filled {
+          border-radius: 5px 5px 0 0 !important;
+        }
+
+        ::ng-deep .mat-mdc-text-field-wrapper {
+          display: flex;
+          align-items: center;
+          height: 40px;
+        }
+
+        ::ng-deep {
+          .mat-mdc-form-field-subscript-wrapper,
+          .mat-mdc-form-field-bottom-align {
+            display: none !important;
+          }
+        }
+      }
+    }
+
+    .header-end {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      .toggle-theme {
+        mat-slide-toggle ::ng-deep .mdc-switch .mdc-switch__icons svg {
+          display: none;
+        }
+      }
+
+      .user-info {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        img {
+          width: 35px;
+          height: 35px;
+          border-radius: 50%;
+          cursor: pointer;
+        }
+
+        span {
+          position: absolute;
+          left: 65%;
+          top: 60%;
+          background: white;
+          width: 15px;
+          height: 15px;
+          border-radius: 50%;
+          cursor: pointer;
+
+          mat-icon {
+            display: block;
+            width: 15px;
+            height: 15px;
+            font-size: 15px;
+            color: black;
+          }
+        }
+      }
+    }
+  }
+}
+
+::ng-deep mat-option {
+  .mdc-list-item__primary-text {
+    display: flex;
+    gap: 0.5rem;
+
+    img {
+      border-radius: 50%;
+    }
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  mat-toolbar {
+    .search {
+      width: 45% !important;
+    }
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  mat-toolbar {
+    .logo {
+      letter-spacing: 2px;
+      font-size: 18px;
+    }
+    .search {
+      width: 35% !important;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  mat-toolbar {
+    .search {
+      width: 100% !important;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      mat-form-field {
+        width: 90%;
+      }
+    }
+  }
+}

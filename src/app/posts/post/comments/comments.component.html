@@ -1,0 +1,9 @@
+@if (isLoading) {
+<div>
+  <mat-spinner></mat-spinner>
+</div>
+} @if (comments.length > 0) { @for(comment of comments; track comment._id) {
+<app-comment [commentData]="comment"></app-comment>
+} } @else { @if (!isLoading) {
+<p>No comments yet</p>
+} }

@@ -1,0 +1,29 @@
+<div class="chat-wrapper" [class.chat-open]="isChatOpen">
+  <div class="chat-list">
+    <h1>Chats:</h1>
+    @if (!isLoading) { @for(chat of chats; track chat._id) {
+    <app-chat
+      [chatData]="chat"
+      [unreadCount]="unreadCounts[chat._id] || 0"
+    ></app-chat>
+    } @empty { @if (!isLoading) {
+    <p>No chats yet!</p>
+    } } } @else {
+    <mat-spinner></mat-spinner>
+    }
+  </div>
+  <div class="chat-message">
+    @if (selectedChatId) {
+    <app-chat-messages
+      [chats]="chats"
+      [chatId]="selectedChatId"
+      (onDeleteChat)="deletedChat($event)"
+      (unreadCountChange)="handleUnreadCount($event)"
+    ></app-chat-messages>
+    } @else {
+    <div class="no-chat-message">
+      <h2>Select a chat to start messaging</h2>
+    </div>
+    }
+  </div>
+</div>

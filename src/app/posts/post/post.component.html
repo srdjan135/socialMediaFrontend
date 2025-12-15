@@ -1,0 +1,53 @@
+<mat-card class="example-card" appearance="outlined">
+  <mat-card-header>
+    <div>
+      <a [routerLink]="['/', user?.username]">
+        <img
+          mat-card-avatar
+          [src]="user?.imagePath ? user?.imagePath : '/assets/user_blank.png'"
+          alt=""
+        />
+      </a>
+
+      <a [routerLink]="['/', user?.username]">
+        <mat-card-title>{{ user?.username }}</mat-card-title>
+      </a>
+    </div>
+    @if (userId === postData.userId) {
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" xPosition="before">
+      <button mat-menu-item (click)="onDeletePost()">
+        <mat-icon>delete</mat-icon>
+        <span>Delete</span>
+      </button>
+    </mat-menu>
+    }
+  </mat-card-header>
+  <img
+    mat-card-image
+    class="content-img"
+    [src]="postData?.imagePath"
+    alt="Photo of a Shiba Inu"
+  />
+  <mat-card-actions>
+    <button mat-icon-button (click)="likePost()">
+      <mat-icon [color]="postData.isUserLiked && user ? 'primary' : ''">{{
+        postData.isUserLiked && user ? "favorite" : "favorite_border"
+      }}</mat-icon>
+    </button>
+    <span>{{ postData?.likes?.length }}</span>
+    <div>
+      <button mat-icon-button (click)="openCommentsDialog(postData._id)">
+        <mat-icon>chat_bubble_outline</mat-icon>
+      </button>
+      <span>{{ postData?.comments?.length }}</span>
+    </div>
+  </mat-card-actions>
+  <mat-card-content>
+    <p>
+      {{ postData?.description }}
+    </p>
+  </mat-card-content>
+</mat-card>

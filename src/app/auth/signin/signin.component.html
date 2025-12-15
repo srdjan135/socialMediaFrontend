@@ -1,0 +1,47 @@
+<form (submit)="onLogin(signInForm)" #signInForm="ngForm">
+  <h1>Sign In</h1>
+  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input
+      matInput
+      type="email"
+      name="email"
+      ngModel
+      email
+      required
+      #email="ngModel"
+    />
+    <mat-icon matSuffix>contact_mail</mat-icon>
+    @if (email.invalid) {
+    <mat-error>Email is invalid!</mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input
+      matInput
+      [type]="hide() ? 'password' : 'text'"
+      name="password"
+      ngModel
+      minlength="5"
+      required
+      #password="ngModel"
+    />
+    <button
+      type="button"
+      mat-icon-button
+      matSuffix
+      (click)="clickEvent($event)"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide()"
+    >
+      <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
+    </button>
+    @if (password.invalid) {
+    <mat-error>Password is invalid!</mat-error>
+    }
+  </mat-form-field>
+  <button mat-flat-button>Sign In</button>
+  <p>You don't have account? <a routerLink="/signup">Sign up here</a></p>
+</form>

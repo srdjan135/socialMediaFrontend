@@ -1,0 +1,87 @@
+<aside>
+  <mat-list>
+    <mat-list-item>
+      <mat-icon>menu</mat-icon>
+      @if (!sidenavService.isCollapsedSidenav) {
+      <span>Menu</span>
+      }
+    </mat-list-item>
+
+    <div>
+      <mat-divider></mat-divider>
+      <button mat-icon-button (click)="toggleSidenav()">
+        <mat-icon [class.rotate-icon]="!sidenavService.isCollapsedSidenav">
+          arrow_forward
+        </mat-icon>
+      </button>
+    </div>
+
+    <mat-list-item
+      routerLink="/"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      [matTooltip]="showTooltip ? 'Home' : ''"
+      [matTooltipPosition]="tooltipPosition"
+    >
+      <mat-icon>home</mat-icon>
+      @if (!sidenavService.isCollapsedSidenav) {
+      <span>Home</span>
+      }
+    </mat-list-item>
+
+    <mat-list-item
+      routerLink="/chats"
+      routerLinkActive="active"
+      [matTooltip]="showTooltip ? 'Chats' : ''"
+      [matTooltipPosition]="tooltipPosition"
+    >
+      <mat-icon>comment</mat-icon>
+      @if (!sidenavService.isCollapsedSidenav) {
+      <span>Chats</span>
+      }
+    </mat-list-item>
+
+    <mat-list-item
+      routerLink="/create-post"
+      routerLinkActive="active"
+      [matTooltip]="showTooltip ? 'Create post' : ''"
+      [matTooltipPosition]="tooltipPosition"
+    >
+      <mat-icon>add_box</mat-icon>
+      @if (!sidenavService.isCollapsedSidenav) {
+      <span>Create post</span>
+      }
+    </mat-list-item>
+
+    <mat-list-item
+      routerLink="/notifications"
+      routerLinkActive="active"
+      (click)="openNotificationsPanel()"
+      [matTooltip]="showTooltip ? 'Notifications' : ''"
+      [matTooltipPosition]="tooltipPosition"
+    >
+      <mat-icon
+        [matBadge]="unreadCount"
+        matBadgeSize="large"
+        matBadgeColor="warn"
+      >
+        favorite
+      </mat-icon>
+      @if (!sidenavService.isCollapsedSidenav) {
+      <span>Notifications</span>
+      }
+    </mat-list-item>
+
+    <mat-list-item
+      [routerLink]="'/' + user?.username"
+      routerLinkActive="active"
+      [matTooltip]="showTooltip ? 'Your account' : ''"
+      [matTooltipPosition]="tooltipPosition"
+    >
+      <mat-icon>account_circle</mat-icon>
+      @if (!sidenavService.isCollapsedSidenav) {
+      <span>Your account</span>
+      }
+    </mat-list-item>
+  </mat-list>
+</aside>

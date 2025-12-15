@@ -1,0 +1,118 @@
+:host {
+  aside {
+    mat-list {
+      div {
+        display: flex;
+        align-items: center;
+        mat-divider {
+          width: 80%;
+        }
+      }
+      mat-list-item {
+        margin: 8px 0;
+        ::ng-deep .mat-mdc-list-item-unscoped-content {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+        }
+        border-left: 2px solid transparent;
+      }
+      mat-list-item:hover {
+        cursor: pointer;
+        border-left-color: var(--app-primary-color);
+
+        a {
+          mat-icon {
+            color: var(--app-primary-color) !important;
+          }
+
+          span {
+            color: var(--app-primary-color) !important;
+          }
+        }
+      }
+      mat-list-item:first-child:hover {
+        cursor: default;
+        border-left-color: transparent;
+        mat-icon {
+          color: var(--app-text-color);
+        }
+        span {
+          color: var(--app-text-color) !important;
+        }
+      }
+      mat-list-item[routerLink="/notifications"] {
+        ::ng-deep .mat-mdc-list-item-unscoped-content {
+          padding: 0.5rem 0;
+        }
+      }
+      div {
+        mat-icon {
+          transition: transform 0.3s ease-in-out;
+        }
+      }
+    }
+  }
+}
+
+.rotate-icon {
+  transform: rotate(-180deg);
+}
+
+.active {
+  border-left-color: var(--app-primary-color) !important;
+
+  mat-icon {
+    color: var(--app-primary-color);
+  }
+
+  span {
+    color: var(--app-primary-color) !important;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  mat-list {
+    display: flex;
+    justify-content: space-evenly;
+
+    mat-list-item {
+      width: auto;
+
+      ::ng-deep .mdc-list-item__content {
+        overflow: visible;
+
+        .mat-mdc-list-item-unscoped-content {
+          overflow: visible;
+        }
+      }
+      span {
+        display: none;
+      }
+    }
+
+    mat-list-item:hover {
+      border-left-color: transparent !important;
+    }
+
+    mat-list-item:first-child,
+    div {
+      display: none !important;
+    }
+  }
+
+  .active {
+    border-left-color: transparent !important;
+  }
+}
+
+@media only screen and (max-width: 680px) {
+  mat-list-item {
+    width: 20% !important;
+
+    ::ng-deep .mat-mdc-list-item-unscoped-content {
+      justify-content: center;
+    }
+  }
+}

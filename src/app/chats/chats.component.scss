@@ -1,0 +1,89 @@
+:host {
+  display: block;
+  height: 100%;
+  box-sizing: border-box;
+
+  .chat-wrapper {
+    display: flex;
+    align-items: center;
+    height: 100%;
+
+    .chat-list {
+      width: 30%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: left;
+      border-right: 1px solid var(--app-text-color);
+      height: 100%;
+      padding: 1rem;
+
+      h1 {
+        font-size: 2rem;
+        align-self: self-start;
+      }
+
+      app-chat {
+        display: block;
+        cursor: pointer;
+        width: 100%;
+
+        ::ng-deep mat-card {
+          padding: 1rem 1.5rem;
+        }
+      }
+
+      app-chat:hover ::ng-deep mat-card {
+        background-color: var(--app-primary-color);
+
+        mat-card-title {
+          color: #1a1a1a;
+        }
+      }
+    }
+
+    .chat-message {
+      width: 70%;
+      height: 100%;
+
+      .no-chat-message {
+        height: 100%;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .chat-list {
+    width: 100% !important;
+    border-right: 0 !important;
+  }
+
+  .chat-message {
+    width: 100% !important;
+  }
+
+  .chat-wrapper.chat-open {
+    .chat-list {
+      display: none;
+    }
+
+    .chat-message {
+      display: block;
+    }
+  }
+
+  .chat-wrapper:not(.chat-open) {
+    .chat-list {
+      display: block;
+    }
+
+    .chat-message {
+      display: none;
+    }
+  }
+}
