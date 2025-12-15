@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://backendapi-y2lq.onrender.com',
+  apiUrl: 'https://backendapi-y2lq.onrender.com/api/',
 };
