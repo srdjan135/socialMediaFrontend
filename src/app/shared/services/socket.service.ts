@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
 
-const BACKEND_URL = 'http://localhost:3000';
+const BACKEND_URL = 'https://backendapi-y2lq.onrender.com';
 
 @Injectable({ providedIn: 'root' })
 export class SocketService {
