@@ -1,4 +1,5 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://backendapi-y2lq.onrender.com/api/',
+  apiUrl: 'http://localhost:3000/api/',
+  socketUrl: 'http://localhost:3000',
 };

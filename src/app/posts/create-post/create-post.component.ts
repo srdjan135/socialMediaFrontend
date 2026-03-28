@@ -31,7 +31,7 @@ export class CreatePostComponent {
 
   constructor(
     private postsService: PostsService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
   ) {}
 
   onSubmit(form: NgForm) {

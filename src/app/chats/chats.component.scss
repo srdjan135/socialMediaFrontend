@@ -39,6 +39,18 @@
         mat-card-title {
           color: #1a1a1a;
         }
+
+        mat-card-header {
+          .unread {
+            width: 30px;
+            height: 30px;
+            line-height: 2;
+            border-radius: 50%;
+            background: var(--app-bg-color);
+            text-align: center;
+            color: var(--app-primary-color);
+          }
+        }
       }
     }
 

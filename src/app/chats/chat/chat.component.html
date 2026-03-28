@@ -6,38 +6,47 @@
 >
   <mat-card-header>
     @if (currentUser?._id === chatData?.recipientId) {
-    <ng-container>
-      <div class="image">
-        <img
-          mat-card-avatar
-          [src]="senderUser?.imagePath || '/assets/user_blank.png'"
-        />
+      <ng-container>
+        <div class="wrapper">
+          <div class="image">
+            <img
+              mat-card-avatar
+              [src]="senderUser?.imagePath || '/assets/user_blank.png'"
+            />
 
-        <div
-          class="is-active"
-          *ngIf="senderUser?._id && onlineUsers.includes(senderUser._id)"
-        ></div>
-      </div>
-      <mat-card-title>{{ senderUser?.username }}</mat-card-title>
-      <span>{{ unreadCount }}</span>
-    </ng-container>
+            <div
+              class="is-active"
+              *ngIf="senderUser?._id && onlineUsers.includes(senderUser._id)"
+            ></div>
+          </div>
+          <mat-card-title>{{ senderUser?.username }}</mat-card-title>
+        </div>
 
+        @if (unreadCount > 0) {
+          <span class="unread">{{ unreadCount }}</span>
+        }
+      </ng-container>
     } @else {
-    <ng-container>
-      <div class="image">
-        <img
-          mat-card-avatar
-          [src]="recipientUser?.imagePath || '/assets/user_blank.png'"
-        />
+      <ng-container>
+        <div class="wrapper">
+          <div class="image">
+            <img
+              mat-card-avatar
+              [src]="recipientUser?.imagePath || '/assets/user_blank.png'"
+            />
 
-        <div
-          class="is-active"
-          *ngIf="senderUser?._id && onlineUsers.includes(recipientUser._id)"
-        ></div>
-      </div>
-      <mat-card-title>{{ recipientUser?.username }}</mat-card-title>
-      <span>{{ unreadCount }}</span>
-    </ng-container>
+            <div
+              class="is-active"
+              *ngIf="senderUser?._id && onlineUsers.includes(recipientUser._id)"
+            ></div>
+          </div>
+          <mat-card-title>{{ recipientUser?.username }}</mat-card-title>
+        </div>
+
+        @if (unreadCount > 0) {
+          <span class="unread">{{ unreadCount }}</span>
+        }
+      </ng-container>
     }
   </mat-card-header>
 </mat-card>

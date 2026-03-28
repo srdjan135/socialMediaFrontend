@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
-
-const BACKEND_URL = 'https://backendapi-y2lq.onrender.com';
+import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class SocketService {
@@ -22,7 +21,7 @@ export class SocketService {
   }
 
   private initSocket() {
-    this.socket = io(BACKEND_URL, {
+    this.socket = io(environment.socketUrl, {
       transports: ['websocket', 'polling'],
       withCredentials: true,
     });

@@ -17,7 +17,10 @@ export class AuthService {
   private authReady = new BehaviorSubject<boolean>(false);
   authReady$ = this.authReady.asObservable();
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+  ) {}
 
   getToken() {
     return this.token;
@@ -49,19 +52,20 @@ export class AuthService {
           loginData.append('email', userData.get('email') as string);
           loginData.append('password', userData.get('password') as string);
           return this.login(loginData);
-        })
+        }),
       );
   }
 
   login(userData: FormData): Observable<User> {
     return this.http
-      .post<{ token: string; expiresIn: number; user?: User }>(
-        BACKEND_URL + 'login',
-        userData
-      )
+      .post<{
+        token: string;
+        expiresIn: number;
+        user?: User;
+      }>(BACKEND_URL + 'login', userData)
       .pipe(
         tap((res) => this.handleAuth(res.token, res.expiresIn)),
-        map((res) => res.user!)
+        map((res) => res.user!),
       );
   }
 

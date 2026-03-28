@@ -3,11 +3,10 @@ import {
   ChangeDetectorRef,
   Component,
   inject,
-  model,
   OnDestroy,
 } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatIconButton } from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
@@ -51,7 +50,7 @@ export class DialogComponent implements OnDestroy {
 
   constructor(
     private commentsService: CommentsService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
   ) {}
 
   onSubmit(form: NgForm) {
